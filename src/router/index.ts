@@ -67,6 +67,14 @@ export const router = createRouter({
           component: () => import('@/modules/views/pages/VisualizadorGeneral.vue'),
           meta: { requiresAuth: true }
         },
+        // tengo que agregar paginas y verificar si ya existen:
+        // - intereses
+        // - mi matriz
+        // - reposte
+        // - crear intereses
+        // - normas
+        // - entidades
+        // - tipo de normas
       ]
     },
     // auth
