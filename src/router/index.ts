@@ -50,12 +50,6 @@ export const router = createRouter({
           meta: { requiresAuth: true }
         },
         {
-          path: '/interes-matriz-legal',
-          name: 'interes-matriz-legal',
-          component: () => import('@/modules/views/pages/InteresesMatrizLegal.vue'),
-          meta: { requiresAuth: true }
-        },
-        {
           path: '/intereses-pages',
           name: 'intereses-pages',
           component: () => import('@/modules/views/pages/interesespagues.vue'),

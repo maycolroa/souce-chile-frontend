@@ -3,7 +3,7 @@
     <!-- Barra superior azul oscuro -->
     <div class="bg-[#213741] w-full h-16 fixed top-0 left-0 flex items-center justify-between px-8 z-10">
       <div></div> <!-- Espacio vacío -->
-      <img src="@/assets/logo_rigs_blanco_R 1.png" alt="RIGS Logo" class="w-7 h-auto" />
+      <img src="@/assets/logo_rigs_blanco_R 1.png" alt="RIGS Logo" class="w-6 h-auto" />
     </div>
 
     <div class="flex w-full h-full mt-16 relative">
