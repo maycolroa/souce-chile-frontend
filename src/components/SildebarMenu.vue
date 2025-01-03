@@ -1,25 +1,43 @@
 <template>
-  <div class="flex h-screen bg-gray-200">
+  <div class="flex h-[calc(100vh-4rem)] mt-16">
     <div @mouseover="expandSidebar" @mouseleave="collapseSidebar"
-      :class="['transition-all duration-300 h-full flex flex-col', { 'w-64': isExpanded, 'w-20': !isExpanded }]"
-      class="bg-[#213741] text-white">
-      <!-- Espacio adicional en la parte superior para el primer icono -->
-      <div class="mt-10 flex-grow">
-        <ul class="flex flex-col space-y-4">
-          <li v-for="item in menuItems" :key="item.name" class="flex items-center px-6 hover:bg-[#0E1A22]">
-            <router-link :to="item.path" class="flex items-center w-full">
-              <i :class="[item.icon, 'w-6 h-6']"></i>
-              <span v-if="isExpanded" class="ml-4">{{ item.name }}</span>
-            </router-link>
-          </li>
-        </ul>
+      class="bg-[#213741] text-white transition-all duration-300 h-full fixed z-40"
+      :class="[isExpanded ? 'w-64' : 'w-20']">
+      <div class="flex flex-col h-full">
+        <nav class="flex-grow mt-10">
+          <ul class="flex flex-col space-y-2">
+            <li v-for="item in menuItems" :key="item.name">
+              <router-link :to="item.path"
+                class="flex items-center px-6 py-3 text-gray-300 hover:bg-[#0E1A22] hover:text-white transition-colors duration-200"
+                :class="{ 'justify-center': !isExpanded }">
+                <i :class="[item.icon, 'text-2xl']"></i>
+                <span v-if="isExpanded" class="ml-4 whitespace-nowrap transition-opacity duration-200">
+                  {{ item.name }}
+                </span>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mt-auto mb-4">
+          <router-link to="/configuraciones"
+            class="flex items-center px-6 py-3 text-gray-300 hover:bg-[#0E1A22] hover:text-white transition-colors duration-200"
+            :class="{ 'justify-center': !isExpanded }">
+            <i class="fas fa-cog text-2xl"></i>
+            <span v-if="isExpanded" class="ml-4 whitespace-nowrap transition-opacity duration-200">
+              Configuraciones
+            </span>
+          </router-link>
+        </div>
       </div>
-      <div class="mb-4">
-        <router-link to="/configuraciones" class="flex items-center h-12 px-6 hover:bg-[#0E1A22]">
-          <i class="fas fa-cog w-6 h-6"></i>
-          <span v-if="isExpanded" class="ml-4">Configuraciones</span>
-        </router-link>
-      </div>
+    </div>
+
+    <!-- Espaciador para el contenido principal -->
+    <div :class="[isExpanded ? 'w-64' : 'w-20']" aria-hidden="true"></div>
+
+    <!-- Contenido principal -->
+    <div class="flex-1 overflow-auto">
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -56,19 +74,12 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.fas {
+.text-2xl {
   font-size: 1.5rem;
+  line-height: 2rem;
 }
 
-/* Espacio superior adicional */
 .mt-10 {
-  margin-top: 5.5rem;
-  /* Aumenta el espacio superior */
-}
-
-/* Asegura que el sidebar ocupe toda la altura de la pantalla */
-.bg-gray-200 {
-  height: 100vh;
-  overflow: hidden;
+  margin-top: 2.5rem;
 }
 </style>

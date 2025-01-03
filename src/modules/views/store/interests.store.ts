@@ -7,6 +7,7 @@ export const useInterestStore = defineStore("interest", {
     interests: [] as Interest[], // Aquí guardaremos los intereses procesados
     laws: [] as Law[], // Guardamos las leyes completas
     assignedLaws: [] as Law[], // Guardamos las leyes asignadas a una empresa
+    selectedLaw: null as Law | null,
     total: 0,
     limit: 50,
   }),
@@ -114,5 +115,20 @@ export const useInterestStore = defineStore("interest", {
     selectedInterests() {
       return this.interests.filter((interest) => interest.selected);
     },
+
+    // Devuelve las leyes seleccionadas
+    async fetchLawDetails(lawId: string) {
+      try {
+        const response = await reserApi.get<Law>(`/law/${lawId}`);
+        if (response && response.data) {
+          this.selectedLaw = response.data;
+          return response.data;
+        }
+        throw new Error('No se encontraron datos de la ley');
+      } catch (error) {
+        console.error('Error al obtener los detalles de la ley:', error);
+        throw error;
+      }
+    }
   },
 });
